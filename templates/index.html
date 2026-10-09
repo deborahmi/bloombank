@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bloom Bank ATM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="card-container">
+        <h1>Welcome to Bloom Bank ATM</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{ category }}">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('login') }}" method="POST">
+            <h3>Insert ATM Card</h3>
+            <input type="text" name="card_number" placeholder="16-Digit Card Number" required>
+            <input type="password" name="pin" maxlength="4" placeholder="4-Digit PIN" required>
+            <button type="submit" class="btn">Proceed</button>
+        </form>
+
+        <hr>
+        <p>Don't have an account?</p>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary">Open New Account</a>
+    </div>
+</body>
+</html>

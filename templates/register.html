@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Account - Bloom Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="card-container">
+        <h2>Open an Account</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{ category }}">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('register') }}" method="POST">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="full_name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" name="age" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>NIN (11 digits - required if under 18)</label>
+                <input type="text" name="nin" maxlength="11">
+            </div>
+
+            <div class="form-group">
+                <label>BVN (11 digits - optional)</label>
+                <input type="text" name="bvn" maxlength="11">
+            </div>
+
+            <div class="form-group">
+                <label>Create 4-Digit Security PIN</label>
+                <input type="password" name="pin" maxlength="4" required>
+            </div>
+
+            <button type="submit" class="btn">Register Account</button>
+        </form>
+
+        <hr>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Login</a>
+    </div>
+</body>
+</html>

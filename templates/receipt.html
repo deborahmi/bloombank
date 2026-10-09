@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Receipt - Bloom Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { background-color: #fff; }
+            .card-container { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <h2>BLOOM BANK ATM</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 20px;">Transaction Receipt</p>
+        <hr>
+        <div style="line-height: 2;">
+            <p><strong>Date/Time:</strong> {{ tx.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            <p><strong>Account Holder:</strong> {{ user.full_name }}</p>
+            <p><strong>Account Number:</strong> {{ user.account_number }}</p>
+            <p><strong>Transaction Type:</strong> {{ tx.trans_type }}</p>
+            <p><strong>Amount:</strong> ₦{{ "{:,.2f}".format(tx.amount) }}</p>
+            <p><strong>Available Balance:</strong> ₦{{ "{:,.2f}".format(tx.balance_after) }}</p>
+        </div>
+        <hr>
+        <p style="text-align: center; font-size: 0.9rem;">Thank you for banking with Bloom Bank!</p>
+        <br>
+        <div class="no-print">
+            <button onclick="window.print()" class="btn">🖨️ Print Receipt</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
